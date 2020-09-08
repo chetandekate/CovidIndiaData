@@ -1,7 +1,7 @@
 import pandas as pd
 from  fetchCovidIndiadata import Covid19IndiaData as Covid19
 import os
-
+import matplotlib.pyplot as plt
 
 class CovidIndiaData( Covid19 ):
     def __init__(self):
@@ -80,9 +80,22 @@ class CovidIndiaData( Covid19 ):
         pd.options.display.max_rows = None
         TimeSeriesList = super( CovidIndiaData, self ).get_time_series_data()
         TimeSeriesData = pd.DataFrame( TimeSeriesList,
-                                       columns=['date', 'dailyconfirmed', 'dailydeceased', 'dailyrecovered'] )
-        return TimeSeriesData.tail( 7 )
+                                       columns=['date' ,'dailyconfirmed', 'dailydeceased', 'dailyrecovered'] )
+        #TimeSeriesData.id = pd.to_( pf.id )
+        TimeSeriesData.dailyconfirmed = pd.to_numeric( TimeSeriesData.dailyconfirmed )
+        TimeSeriesData.dailydeceased = pd.to_numeric( TimeSeriesData.dailydeceased )
+        TimeSeriesData.dailyrecovered = pd.to_numeric( TimeSeriesData.dailyrecovered )
+        TimeSeriesData_LstWeek = TimeSeriesData.tail(7)
 
+        #plt.xticks(rotation=90)
+        plt.plot( TimeSeriesData_LstWeek.date, TimeSeriesData_LstWeek.dailyconfirmed, color='orange', label='Daily Confirmed' )
+        plt.plot( TimeSeriesData_LstWeek.date, TimeSeriesData_LstWeek.dailydeceased, color='red', label='Daily Death' )
+        plt.plot( TimeSeriesData_LstWeek.date, TimeSeriesData_LstWeek.dailyrecovered, color='green', label='Daily Recovered' )
+        #plt.style()
+        plt.legend(loc=6)
+        plt.show()
+
+        #my_plot = TimeSeries_Data_totals.plot( kind='bar')
     '''
     Function Name:get_last30days_total_data
     Functionality : Takes time series data (daily  data) from Covid19IndiaData.                
@@ -110,7 +123,11 @@ class CovidIndiaData( Covid19 ):
 
 def test():
     covidIndia_Data = CovidIndiaData()
-    TimeSeries_data = covidIndia_Data.get_last30days_total_data()
-    print(TimeSeries_data)
+    covidIndia_Data.get_daywise_lastWeek_total_data()
+
+    '''
+    
+    print(TimeSeries_data)'''
+
 
 test()
