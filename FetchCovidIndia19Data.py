@@ -81,19 +81,26 @@ class CovidIndiaData( Covid19 ):
         TimeSeriesList = super( CovidIndiaData, self ).get_time_series_data()
         TimeSeriesData = pd.DataFrame( TimeSeriesList,
                                        columns=['date' ,'dailyconfirmed', 'dailydeceased', 'dailyrecovered'] )
+        return TimeSeriesData.tail(7)
         #TimeSeriesData.id = pd.to_( pf.id )
-        TimeSeriesData.dailyconfirmed = pd.to_numeric( TimeSeriesData.dailyconfirmed )
+        '''TimeSeriesData.dailyconfirmed = pd.to_numeric( TimeSeriesData.dailyconfirmed )
         TimeSeriesData.dailydeceased = pd.to_numeric( TimeSeriesData.dailydeceased )
         TimeSeriesData.dailyrecovered = pd.to_numeric( TimeSeriesData.dailyrecovered )
         TimeSeriesData_LstWeek = TimeSeriesData.tail(7)
+        #plt.axes( axisbg='#E6E6E6' )
 
+        #plt.grid( color='grey', linestyle='solid' )
+        plt.style.use( plt.style.available[9] )
+        plt.xlabel("DATE")
+        #plt.xticks(rotation=90)
+        #plt.autoscale()
         #plt.xticks(rotation=90)
         plt.plot( TimeSeriesData_LstWeek.date, TimeSeriesData_LstWeek.dailyconfirmed, color='orange', label='Daily Confirmed' )
         plt.plot( TimeSeriesData_LstWeek.date, TimeSeriesData_LstWeek.dailydeceased, color='red', label='Daily Death' )
         plt.plot( TimeSeriesData_LstWeek.date, TimeSeriesData_LstWeek.dailyrecovered, color='green', label='Daily Recovered' )
-        #plt.style()
+        count=0
         plt.legend(loc=6)
-        plt.show()
+        plt.show()'''
 
         #my_plot = TimeSeries_Data_totals.plot( kind='bar')
     '''
@@ -122,11 +129,8 @@ class CovidIndiaData( Covid19 ):
 
 
 def test():
-    covidIndia_Data = CovidIndiaData()
+    '''covidIndia_Data = CovidIndiaData()
     covidIndia_Data.get_daywise_lastWeek_total_data()
-
-    '''
-    
     print(TimeSeries_data)'''
 
 
