@@ -78,6 +78,3 @@ class Covid19IndiaData():
         Testeddata = self.fetch_Covid19India_json_data()
         return Testeddata['tested']
 
-    def get_raw_data(self):
-        Rawdata = self.fetch_Covid19India_json_data()
-        return Rawdata
